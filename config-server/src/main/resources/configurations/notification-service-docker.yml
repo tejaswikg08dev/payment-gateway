@@ -1,0 +1,17 @@
+spring:
+  kafka:
+    bootstrap-servers: kafka:9092
+
+aws:
+  sns:
+    endpoint: http://localstack:4566
+  ses:
+    endpoint: http://localstack:4566
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
