@@ -6,45 +6,35 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 
 @Entity
-@Table(name = "users")
+@Table(name = "refresh_tokens")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class RefreshToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(nullable = false,  unique = true)
-    private String email;
+    @Column(nullable = false, unique = true)
+    private String token;
 
-    @Column(name = "password_hash", nullable = false)
-    private String passwordHash;
+    @Column(name = "user_id", nullable = false)
+    private String userId;
 
-    @Column(name = "full_name", nullable = false)
-    private String fullName;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
+    @Column(name = "expires_at", nullable = false)
+    private Instant expiresAt;
 
     @Column(nullable = false)
     @Builder.Default
-    private boolean active = true;
+    private boolean revoked = false;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private Instant updatedAt;
-
 }
