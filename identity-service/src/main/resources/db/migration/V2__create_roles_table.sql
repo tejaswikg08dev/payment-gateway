@@ -1,0 +1,9 @@
+CREATE TABLE roles (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(20) NOT NULL UNIQUE,
+    description VARCHAR(255)
+);
+
+INSERT INTO roles (name, description) VALUES ('USER', 'Regular end-user');
+INSERT INTO roles (name, description) VALUES ('MERCHANT', 'Merchant who accepts payments');
+INSERT INTO roles (name, description) VALUES ('ADMIN', 'Platform administrator');

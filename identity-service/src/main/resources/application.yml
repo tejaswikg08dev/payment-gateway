@@ -1,24 +1,57 @@
+server:
+  port: 8081
+  # WHY 8081? Each microservice runs on a different port locally:
+  # 8761 = Eureka, 8888 = Config Server, 8080 = API Gateway, 8081 = Identity
+
 spring:
+  application:
+    name: identity-service
+    # This name is used by:
+    # 1. Eureka registration (other services find us by this name)
+    # 2. Config Server (looks for identity-service.yml in config repo)
+
+  config:
+    import: optional:configserver:http://localhost:8888
+    # "optional:" means don't crash if Config Server isn't running
+    # In production, this pulls secrets from a centralized config store
+
   datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:payflow_identity}
-    username: ${DB_USERNAME:payflow}
-    password: ${DB_PASSWORD:payflow_secret}
-    hikari:
-      maximum-pool-size: 20
-      minimum-idle: 5
-      connection-timeout: 30000
+    url: jdbc:postgresql://localhost:5432/payflow_identity
+    username: payflow
+    password: payflow123
+    # In production: use environment variables, NEVER commit real passwords
+    # e.g., url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
 
   jpa:
     hibernate:
-      ddl-auto: validate  # Flyway manages schema; Hibernate only validates
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
+      ddl-auto: validate
+      # CRITICAL SETTING:
+      # • "create" = DESTROYS all data on startup (never in production!)
+      # • "update" = Risky auto-ALTER statements
+      # • "validate" = Only CHECKS that entities match DB schema
+      # • We use "validate" because FLYWAY manages the actual schema
     show-sql: false
-    open-in-view: false  # Disable OSIV anti-pattern
+    # Set to true temporarily for debugging SQL queries
 
   flyway:
     enabled: true
-    locations: classpath:db/migration
     baseline-on-migrate: true
+    # baseline-on-migrate: If tables already exist (e.g., created manually),
+    # Flyway treats the current state as the baseline and runs new migrations
+
+jwt:
+  secret: payflow-jwt-secret-key-must-be-at-least-256-bits-long-for-hmac-sha256
+  # MINIMUM 32 bytes for HMAC-SHA256. This dev key is 64 bytes.
+  # In production: generate with `openssl rand -base64 64`
+  access-token-expiration: 900000      # 15 minutes in milliseconds
+  refresh-token-expiration: 604800000  # 7 days in milliseconds
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+    # prefer-ip-address: Use IP instead of hostname for Docker compatibility
+    # instance-id: Unique identifier when multiple instances run
