@@ -40,6 +40,7 @@
         <module>config-server</module>
         <module>api-gateway</module>
         <module>identity-service</module>
+        <module>merchant-service</module>
     </modules>
 
     <!-- ═══════════════════════════════════════════════════════════════
