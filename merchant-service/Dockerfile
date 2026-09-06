@@ -9,14 +9,16 @@ COPY api-gateway ./api-gateway
 COPY identity-service ./identity-service
 COPY merchant-service ./merchant-service
 
-RUN mvn clean package -pl service-registry -am -DskipTests -B
+RUN mvn clean package -pl merchant-service -am -DskipTests -B
 
 FROM eclipse-temurin:17-jre-alpine
+
 WORKDIR /app
 RUN addgroup -S payflow && adduser -S payflow -G payflow
 USER payflow
-COPY --from=builder /app/service-registry/target/*.jar app.jar
-EXPOSE 8761
+COPY --from=builder /app/merchant-service/target/*.jar app.jar
+EXPOSE 8082
 HEALTHCHECK --interval=15s --timeout=10s --retries=5 --start-period=30s \
-    CMD wget -q0- http://localhost:8761/actuator/health || exit 1
+    CMD wget -qO- http://localhost:8082/actuator/health || exit 1
+
 ENTRYPOINT ["java", "-jar", "app.jar"]

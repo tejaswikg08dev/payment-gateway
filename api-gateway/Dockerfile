@@ -8,8 +8,8 @@ COPY common-lib ./common-lib
 COPY service-registry ./service-registry
 COPY config-server ./config-server
 COPY api-gateway ./api-gateway
-#COPY identity-service ./identity-service
-#COPY merchant-service ./merchant-service
+COPY identity-service ./identity-service
+COPY merchant-service ./merchant-service
 #COPY payment-service ./payment-service
 #COPY routing-service ./routing-service
 #COPY settlement-service ./settlement-service

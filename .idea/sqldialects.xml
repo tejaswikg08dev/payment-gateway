@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/infra/docker/init-db.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/merchant-service/src/main/resources/db/migration/V2__create_api_keys_table.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/merchant-service/src/main/resources/db/migration/V3__create_webhook_configs_table.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/merchant-service/src/main/resources/db/migration/V4__create_fee_configs_table.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/payment-service/src/main/resources/db/migration/V1__create_orders_table.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/payment-service/src/main/resources/db/migration/V2__create_payments_table.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/payment-service/src/main/resources/db/migration/V3__create_payment_methods_table.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/payment-service/src/main/resources/db/migration/V4__create_refunds_table.sql" dialect="GenericSQL" />
   </component>
 </project>

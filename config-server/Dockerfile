@@ -7,15 +7,9 @@ COPY pom.xml .
 COPY common-lib ./common-lib
 COPY service-registry ./service-registry
 COPY config-server ./config-server
-#COPY api-gateway ./api-gateway
-#COPY identity-service ./identity-service
-#COPY merchant-service ./merchant-service
-#COPY payment-service ./payment-service
-#COPY routing-service ./routing-service
-#COPY settlement-service ./settlement-service
-#COPY webhook-service ./webhook-service
-#COPY notification-service ./notification-service
-#COPY bank-simulator ./bank-simulator
+COPY api-gateway ./api-gateway
+COPY identity-service ./identity-service
+COPY merchant-service ./merchant-service
 
 # Build only the target service and its dependencies
 RUN mvn clean package -pl config-server -am -DskipTests -B
