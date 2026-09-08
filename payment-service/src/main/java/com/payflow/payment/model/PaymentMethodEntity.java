@@ -1,11 +1,12 @@
 package com.payflow.payment.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+/**
+ * Stores payment method details (card, UPI, or net banking) for a payment.
+ * Card details are stored in masked/tokenized form — never raw PAN.
+ */
 @Entity
 @Table(name = "payment_methods")
 @Data
@@ -22,7 +23,8 @@ public class PaymentMethodEntity {
     @Column(name = "payment_id", nullable = false, length = 30)
     private String paymentId;
 
-    // ─── Card Fields (populated when type = "CARD") ───
+    @Column(name = "type", nullable = false, length = 20)
+    private String type;
 
     @Column(name = "card_last4", length = 4)
     private String cardLast4;
@@ -36,12 +38,8 @@ public class PaymentMethodEntity {
     @Column(name = "card_expiry_year", length = 4)
     private String cardExpiryYear;
 
-    // ─── UPI Fields (populated when type = "UPI") ───
-
     @Column(name = "upi_id", length = 100)
     private String upiId;
-
-    // ─── Net Banking Fields (populated when type = "NET_BANKING") ───
 
     @Column(name = "bank_code", length = 20)
     private String bankCode;
@@ -49,4 +47,3 @@ public class PaymentMethodEntity {
     @Column(name = "bank_name", length = 100)
     private String bankName;
 }
-
