@@ -42,6 +42,7 @@
         <module>identity-service</module>
         <module>merchant-service</module>
         <module>payment-service</module>
+        <module>routing-service</module>
     </modules>
 
     <!-- ═══════════════════════════════════════════════════════════════
