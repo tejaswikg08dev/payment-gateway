@@ -1,5 +1,6 @@
 package com.payflow.routing.fraud;
 
+import com.payflow.routing.dto.RoutingRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -116,5 +117,3 @@ public class FraudFeatureExtractor {
     }
 }
 
-
-}

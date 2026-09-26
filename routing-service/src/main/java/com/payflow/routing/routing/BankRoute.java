@@ -22,7 +22,54 @@ public class BankRoute {
         this.active = active;
     }
 
-    // ... standard getters and setters for all 6 fields ...
+    public String getBankId() {
+        return bankId;
+    }
+
+    public void setBankId(String bankId) {
+        this.bankId = bankId;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public double getSuccessRate() {
+        return successRate;
+    }
+
+    public void setSuccessRate(double successRate) {
+        this.successRate = successRate;
+    }
+
+    public double getAvgLatencyMs() {
+        return avgLatencyMs;
+    }
+
+    public void setAvgLatencyMs(double avgLatencyMs) {
+        this.avgLatencyMs = avgLatencyMs;
+    }
+
+    public double getCostPerTxn() {
+        return costPerTxn;
+    }
+
+    public void setCostPerTxn(double costPerTxn) {
+        this.costPerTxn = costPerTxn;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+// ... standard getters and setters for all 6 fields ...
 
     @Override
     public String toString() {
