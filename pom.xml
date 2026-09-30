@@ -44,6 +44,7 @@
         <module>payment-service</module>
         <module>routing-service</module>
         <module>bank-simulator</module>
+        <module>settlement-service</module>
     </modules>
 
     <!-- ═══════════════════════════════════════════════════════════════
